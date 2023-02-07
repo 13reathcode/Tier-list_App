@@ -1,0 +1,67 @@
+// CONTENT
+
+.content {
+    width: 70vw;
+    min-height: 10vh;
+    padding: 0rem;
+    box-sizing: content-box;
+    border: var(--border-small);
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0 auto;
+
+    &__row {
+        width: 100%;
+        min-height: 8.5rem;
+        background-color: var(--color-black-dark);
+        display: flex;
+        box-sizing: content-box;
+        flex-wrap: wrap;
+
+        &:not(:last-child) {
+            border-bottom: var(--border-small);
+        }
+    }
+
+    &__label {
+        font-size: 2rem;
+        font-weight: 400;
+        min-height: 100%;
+        width: 15rem;
+
+        background-color: var(--color-black-light-1);
+        color: var(--color-black-light-2);
+        border-right: var(--border-small);
+
+        @include center;
+    }
+
+    &__card {
+        height: 8.5rem;
+        width: 8.5rem;
+        background-color: transparent;
+
+        @include center;
+
+        &:focus,
+        &:active {
+            cursor: pointer;
+        }
+    }
+}
+
+// BANK
+
+.bank {
+    width: 70vw;
+    min-height: 17rem;
+    margin: 2rem auto;
+    background-color: var(--color-black-dark);
+    border: 3px solid var(--color-black);
+
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}

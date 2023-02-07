@@ -1,23 +1,14 @@
 'use strict';
 
+// ------------ ELEMENTS ------------
+
 const colors = ['#FF7F7F', '#FFBF7F', '#FFDF7F', '#BFFF7F', '#7FFF7F', '#7FBFFF', '#7F7FFF'];
 const rows = document.querySelectorAll('.content__row');
-
 const cards = document.querySelectorAll('.content__card');
 const addCard = document.getElementById('addCard');
-
 const bank = document.getElementById('bank');
 
-// Adding card logic
-const addCardToBank = (event) => {
-    const card = createCard();
-    const Bank = document.querySelector('.bank');
-    bank.appendChild(card);
-};
-
-addCard.onclick = addCardToBank;
-
-// Card logic
+//------------ CARD LOGIC ------------
 
 const createCard = () => {
     const card = document.createElement('div');
@@ -27,6 +18,7 @@ const createCard = () => {
 
     card.ondragstart = onDragStart;
     card.ondragend = onDragEnd;
+
     card.onclick = deleteCard;
     insertImage(card);
     return card;
@@ -34,15 +26,16 @@ const createCard = () => {
 
 const insertImage = (card) => {
     const input = document.createElement('input');
+
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/x-png,image/gif,image/jpeg,image/svg');
     input.style.visibility = 'hidden';
+
     input.onchange = () => {
         const image = new Image(85, 85);
         const file = input.files[0];
-        console.log(file);
-
         const reader = new FileReader();
+
         reader.onload = (event) => {
             image.src = event.target.result;
             image.style.pointerEvents = 'none';
@@ -53,13 +46,9 @@ const insertImage = (card) => {
     input.click();
 };
 
-const deleteCard = (event) => {
-    event.target.remove();
-};
+const deleteCard = (event) => event.target.remove();
 
 const onDragStart = (event) => {
-    
-    console.log('Dragging');
     event.dataTransfer.setData('id', event.target.id);
 
     setTimeout(() => {
@@ -68,7 +57,6 @@ const onDragStart = (event) => {
 };
 
 const onDragEnd = (event) => {
-    console.log('Ended dragging');
     event.target.style.visibility = 'visible';
 };
 
@@ -77,16 +65,16 @@ cards.forEach((card) => {
     card.ondragend = onDragEnd;
 });
 
-// Row logic
+//------------ ROW LOGIC ------------
 
-const onDrag = (event) => {
-    event.preventDefault();
-};
+const onDrag = (event) => event.preventDefault();
 
 const onDrop = (event) => {
     event.preventDefault();
+
     const draggedCardId = event.dataTransfer.getData('id');
     const draggedCard = document.getElementById(draggedCardId);
+
     event.target.appendChild(draggedCard);
 };
 
@@ -97,15 +85,20 @@ rows.forEach((row, index) => {
     row.ondrop = onDrop;
 });
 
-// Bank logic
+//------------ BANK LOGIC ------------
+
+bank.ondragover = (event) => event.preventDefault();
+
+const addCardToBank = (event) => {
+    const card = createCard();
+    const bank = document.querySelector('.bank');
+    bank.appendChild(card);
+};
 
 const onDropCard = (event) => {
     const id = event.dataTransfer.getData('id');
     bank.appendChild(document.getElementById(id));
 };
 
-bank.ondragover = (event) => {
-    event.preventDefault();
-};
-
+addCard.onclick = addCardToBank;
 bank.ondrop = onDropCard;
