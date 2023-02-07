@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%; // 10px = 1rem
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    color: #555;
+    line-height: 1.5;
+}
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// SECTIONS
+
+.section {
+    padding: 15rem 3rem;
+
+    &__title {
+        max-width: 80rem;
+        margin: 0 auto 4rem auto;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    &__description {
+        color: lightgreen;
+        font-size: 2rem;
+    }
+
+    &__text {
+        font-size: 2.5rem;
+    }
+}
+
+// CONTENT
+.content {
+    width: 80vw;
+    height:90vh;
+    background-color: orangered;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
+
+    &__row {
+        width: 100%;
+        height: 15%;
+        background-color: skyblue;
+
+        display: flex;
+    }
+
+    &__label {
+        font-size: 4rem;
+        font-weight: 300;
+        height: 100%;
+        width: 10%;
+        background-color: #555;
+        color: #fff;
+
+        @include center;
+    }
+
+    &__card {
+        height: 100%;
+        width: 10%;
+        background-color: purple;
+
+        @include center;
+    }
+}
