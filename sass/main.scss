@@ -25,30 +25,44 @@ body {
 // SECTIONS
 
 .section {
-    padding: 5rem 3rem;
+    padding: 1.8rem 3rem;
 
     &__title {
         max-width: 80rem;
-        margin: 0 auto 4rem auto;
+        margin: 0 auto 2rem auto;
         text-align: center;
         text-transform: uppercase;
     }
 
     &__description {
         color: lightgreen;
-        font-size: 2.5rem;
+        font-size: 1.8rem;
     }
 
     &__text {
-        font-size: 3rem;
+        font-size: 2.5rem;
+    }
+
+    &__button {
+        font-size: 2rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        display: inline-block;
+        border-radius: 3rem;
+        position: relative;
+        background-color: lightgreen;
+        color: #fff;
+
+        border: none;
+        cursor: pointer;
     }
 }
 
 // CONTENT
 .content {
-    max-width: 70vw;
-    min-height: 60vh;
-    background-color: yellow;
+    width: 70vw;
+    min-height: 10vh;
     padding: 0rem;
     box-sizing: content-box;
     border: 3px solid #000;
@@ -61,28 +75,32 @@ body {
     &__row {
         width: 100%;
         box-sizing: content-box;
-        height: 10vh;
+        flex-wrap: wrap;
+        min-height: 8.5rem;
         background-color: #1a1a17;
         display: flex;
-        border: 2px solid #000;
+
+        &:not(:last-child) {
+            border-bottom: 2px solid #000;
+        }
     }
 
     &__label {
         font-size: 2rem;
         font-weight: 400;
-        height: 100%;
-        width: 15%;
+        min-height: 100%;
+        width: 15rem;
         background-color: #555;
         color: #333;
-        border-right: 4px solid #000;
+        border-right: 3px solid #000;
 
         @include center;
     }
 
     &__card {
-        height: 100%;
-        width: 10%;
-        background-color: purple;
+        height: 8.5rem;
+        width: 8.5rem;
+        background-color: transparent;
 
         @include center;
 
@@ -91,4 +109,18 @@ body {
             cursor: pointer;
         }
     }
+}
+
+// BANK
+
+.bank {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70vw;
+    min-height: 17rem;
+    margin: 2rem auto;
+    background-color: #1a1a17;
+    border: 3px solid #000;
+
+    margin: 0 auto;
 }
