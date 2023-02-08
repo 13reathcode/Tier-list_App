@@ -14,44 +14,25 @@
         <script defer src="js/script.js"></script>
     </head>
     <body>
-        <!-- <header class="header">
-            <div class="header__title">Tier list</div>
-        </header> -->
-        <section class="section" id="section--1">
-            <div class="section__title">
-                <h2 class="section__description">Tier list app</h2>
-                <h3 class="section__text">Start dragging to move cards</h3>
-            </div>
-            <div class="content" id="content">
-                <div class="content__row">
-                    <div class="content__label">S (The best)</div>
-                </div>
-                <div class="content__row">
-                    <div class="content__label">A (Great)</div>
-                </div>
-                <div class="content__row">
-                    <div class="content__label">B (Good)</div>
-                </div>
-                <div class="content__row">
-                    <div class="content__label">C (Mediocre)</div>
-                </div>
-                <div class="content__row">
-                    <div class="content__label">D (Bad)</div>
-                </div>
-                <div class="content__row">
-                    <div class="content__label">E (Horrible)</div>
-                </div>
-                <!-- <div class="content__row">
-                    <div class="content__label">F (Worst^_^)</div>
-                </div>  -->
-            </div>
-        </section>
+        <main>
+            <!-- <div class="header">
+                <h2>Upload images</h2>
+                <div class="server-message"></div>
+            </div> -->
 
-        <section class="section" id="section--2">
-            <div class="section__title">
-                <button class="section__button" id="addCard">Upload images</button>
+            <div class="input-div">
+                <p>Drag & drop images here or <span class="browse">Browse</span></p>
+                <input
+                    type="file"
+                    class="file"
+                    multiple="multiple"
+                    accept="image/png, image/jpeg, image/jpg"
+                />
             </div>
-            <div id="bank" class="bank"></div>
-        </section>
+
+            <form id="queued-form">
+                <div class="queued-div"></div>
+            </form>
+        </main>
     </body>
 </html>
