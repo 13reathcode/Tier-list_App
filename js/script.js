@@ -1,39 +1,62 @@
 'use strict';
-let queuedImagesArray = [],
-    queuedForm = document.querySelector('#queued-form'),
-    queuedDiv = document.querySelector('.queued-div'),
-    inputDiv = document.querySelector('.input-div'),
-    input = document.querySelector('.input-div input');
 
-// Queued Images
+// ---------- ELEMENTS ----------
+
+let queuedImagesArray = [],
+    storageForm = document.querySelector('.storage'),
+    storageDiv = document.querySelector('.storage-box'),
+    inputDiv = document.querySelector('.upload'),
+    input = document.querySelector('.upload input');
+
+const colors = ['#FF7F7F', '#FFBF7F', '#FFDF7F', '#BFFF7F', '#7FFF7F', '#7FBFFF', '#7F7FFF'],
+    rows = document.querySelectorAll('.content__row');
+
+// ---------- CARD/IMAGE LOGIC ----------
+
+const onDragStart = (event) => {
+    event.dataTransfer.setData('id', event.target.id);
+
+    setTimeout(() => {
+        event.target.style.visibility = 'hidden';
+    }, 100);
+};
+
+const onDragEnd = (event) => {
+    event.target.style.visibility = 'visible';
+};
+
+// ---------- IMPORTING AND UPDATING IMAGES ----------
 
 const displayQueuedImages = () => {
     let images = '';
     queuedImagesArray.forEach((image, index) => {
         images += `
-        <div class="image">
-            <img src="${URL.createObjectURL(image)}" alt="image" />
-            <span style="color:black" onclick="deleteQueuedImage(${index})">&times;</span>
+        <div class="content__image" draggable="true" >
+            <img width='100' height='100' style="pointerEvents:none;" ondragstart="onDragStart(event)" ondragend="onDragEnd(event)"
+            src="
+            ${URL.createObjectURL(image)}" alt="image" id="${
+            (Date.now() + '').slice(-10) + index
+        }"/>
         </div>
         `;
     });
-
-    queuedDiv.innerHTML = images;
+    // <span style="color:black;font-size:2rem" onclick="deleteQueuedImage(${index})">&times;</span>
+    storageDiv.innerHTML = images;
 };
 
-const deleteQueuedImage = (index) => {
-    queuedImagesArray.splice(index, 1);
-    displayQueuedImages();
-};
+// const deleteQueuedImage = (index) => {
+//     queuedImagesArray.splice(index, 1);
+//     displayQueuedImages();
+// };
 
 input.addEventListener('change', () => {
     const files = input.files;
-    for (let i = 0; i < files.length; i++) {
-        queuedImagesArray.push(files[i]);
+    for (let index = 0; index < files.length; index++) {
+        queuedImagesArray.push(files[index]);
     }
 
-    queuedForm.reset();
-    displayQueuedImages();
+    storageForm.reset(); // UpdateForm
+    displayQueuedImages(); //Add new image
 });
 
 inputDiv.addEventListener('drop', (e) => {
@@ -45,4 +68,24 @@ inputDiv.addEventListener('drop', (e) => {
             queuedImagesArray.push(files[i]);
     }
     displayQueuedImages();
+});
+
+// ---------- ROW LOGIC ----------
+
+const onDragOver = (event) => {
+    event.preventDefault();
+};
+
+const onDrop = (event) => {
+    event.preventDefault();
+    const draggedCardId = event.dataTransfer.getData('id', event.target.id);
+    const draggedCard = document.getElementById(draggedCardId);
+    event.target.appendChild(draggedCard);
+};
+
+rows.forEach((row, index) => {
+    const label = row.querySelector('.content__row-label');
+    label.style.backgroundColor = colors[index];
+    row.ondragover = onDragOver;
+    row.ondrop = onDrop;
 });

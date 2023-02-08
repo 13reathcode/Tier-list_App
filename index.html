@@ -15,26 +15,58 @@
     </head>
     <body>
         <main>
-            <!-- <div class="header">
-                <h2>Upload images</h2>
-                <div class="server-message"></div>
-            </div> -->
+            <section class="section" id="section--1">
+                <div class="section__title">
+                    <h2 class="section__title-description">Tier list app</h2>
+                    <h3 class="section__title-text">Start dragging to move cards</h3>
+                </div>
+                <div class="content" id="content">
+                    <div class="content__row">
+                        <div class="content__row-label">S (The best)</div>
+                    </div>
+                    <div class="content__row">
+                        <div class="content__row-label">A (Great)</div>
+                    </div>
+                    <div class="content__row">
+                        <div class="content__row-label">B (Good)</div>
+                    </div>
+                    <div class="content__row">
+                        <div class="content__row-label">C (Mediocre)</div>
+                    </div>
+                    <div class="content__row">
+                        <div class="content__row-label">D (Bad)</div>
+                    </div>
+                    <!-- <div class="content__row">
+                        <div class="content__row-label">E (Horrible)</div>
+                    </div>
+                    <div class="content__row">
+                        <div class="content__row-label">F (Worst^_^)</div>
+                    </div>  -->
+                </div>
+            </section>
 
-            <div class="input-div">
-                <p>Drag & drop images here or <span class="browse">Browse</span></p>
-                <input
-                    type="file"
-                    class="file"
-                    multiple="multiple"
-                    accept="image/png, image/jpeg, image/jpg"
-                />
-            </div>
+            <section class="section" id="section--2">
+                <div class="section__title">
+                    <h2 class="section__title-description">Scroll down to add images</h2>
+                    <h3 class="section__title-text">All cards are stored here</h3>
+                </div>
 
-            <form id="queued-form">
-                <div class="queued-div"></div>
-            </form>
+                <form class="storage">
+                    <div class="storage-box"></div>
+                </form>
 
-            
+              
+
+                <div class="upload">
+                    <p>Drag & drop images here or <span class="browse">Browse</span></p>
+                    <input
+                        type="file"
+                        class="file"
+                        multiple="multiple"
+                        accept="image/png, image/jpeg, image/jpg"
+                    />
+                </div>
+            </section>
         </main>
     </body>
 </html>
