@@ -14,7 +14,7 @@ const colors = ['#FF7F7F', '#FFBF7F', '#FFDF7F', '#BFFF7F', '#7FFF7F', '#7FBFFF'
 // ---------- CARD/IMAGE LOGIC ----------
 
 const onDragStart = (event) => {
-    event.dataTransfer.setData('id', event.target.id);
+    event.dataTransfer.setData('id', event.target.parentNode.id);
 
     setTimeout(() => {
         event.target.style.visibility = 'hidden';
@@ -31,27 +31,25 @@ const displayQueuedImages = () => {
     let images = '';
     queuedImagesArray.forEach((image, index) => {
         images += `
-        <div class="content__image" draggable="true" >
-            <img width='100' height='100' style="pointerEvents:none;" ondragstart="onDragStart(event)" ondragend="onDragEnd(event)"
-            src="
-            ${URL.createObjectURL(image)}" alt="image" id="${
-            (Date.now() + '').slice(-10) + index
-        }"/>
-        </div>
+        <div class="content__image" onclick="deleteImage(event)"
+         draggable="true" id="${image.id}"ondragstart="onDragStart(event)" ondragend="onDragEnd(event)">
+            <img width='100' height='100' style="pointerEvents:none;"src="${URL.createObjectURL(image)}"alt="image"/>
+         </div>
         `;
     });
-    // <span style="color:black;font-size:2rem" onclick="deleteQueuedImage(${index})">&times;</span>
+
     storageDiv.innerHTML = images;
 };
 
-// const deleteQueuedImage = (index) => {
-//     queuedImagesArray.splice(index, 1);
-//     displayQueuedImages();
-// };
+const deleteImage = (event) => {
+    event.target.parentNode.remove();
+};
 
 input.addEventListener('change', () => {
     const files = input.files;
     for (let index = 0; index < files.length; index++) {
+        const id = (Date.now() + '').slice(-10) + index;
+        files[index].id = id;
         queuedImagesArray.push(files[index]);
     }
 
@@ -64,9 +62,9 @@ inputDiv.addEventListener('drop', (e) => {
     const files = e.dataTransfer.files;
     for (let i = 0; i < files.length; i++) {
         if (!files[i].type.match('image')) return;
-        if (queuedImagesArray.every((image) => image.name !== files[i].name))
-            queuedImagesArray.push(files[i]);
+        if (queuedImagesArray.every((image) => image.name !== files[i].name)) queuedImagesArray.push(files[i]);
     }
+
     displayQueuedImages();
 });
 
@@ -81,6 +79,7 @@ const onDrop = (event) => {
     const draggedCardId = event.dataTransfer.getData('id', event.target.id);
     const draggedCard = document.getElementById(draggedCardId);
     event.target.appendChild(draggedCard);
+    queuedImagesArray = [];
 };
 
 rows.forEach((row, index) => {
