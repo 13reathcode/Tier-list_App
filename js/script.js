@@ -48,7 +48,7 @@ const deleteImage = (event) => {
 input.addEventListener('change', () => {
     const files = input.files;
     for (let index = 0; index < files.length; index++) {
-        const id = (Date.now() + '').slice(-10) + index;
+        const id = Date.now() + '' + index;
         files[index].id = id;
         queuedImagesArray.push(files[index]);
     }
@@ -76,10 +76,11 @@ const onDragOver = (event) => {
 
 const onDrop = (event) => {
     event.preventDefault();
+
     const draggedCardId = event.dataTransfer.getData('id', event.target.id);
     const draggedCard = document.getElementById(draggedCardId);
     event.target.appendChild(draggedCard);
-    queuedImagesArray = [];
+    queuedImagesArray.splice(draggedCard, 1);
 };
 
 rows.forEach((row, index) => {
